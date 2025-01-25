@@ -8,8 +8,6 @@ class DeviseCreateAdmins < ActiveRecord::Migration[7.2]
       t.string :password, null: false, default: ""
       t.string :name,              null: false, default: ""
 
-      t.string :name
-
       t.timestamps null: false
     end
 
