@@ -1,0 +1,39 @@
+<h1>Empresas</h1>
+
+<%= link_to 'Nova Empresa', new_company_path, class: 'btn btn-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CNPJ</th>
+      <th>Endereço</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.name %></td>
+        <td><%= company.decorate.formatted_cnpj %></td>
+        <td>
+          <%=
+            [
+              company.street,
+              company.number,
+              company.complement,
+              company.neighborhood,
+              company.city,
+              company.state
+            ].reject(&:blank?).join(', ')
+          %>
+        </td>
+        <td class="action-links">
+          <%= link_to 'Editar', edit_company_path(company) %>
+          <%= link_to 'Detalhes', company_path(company) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

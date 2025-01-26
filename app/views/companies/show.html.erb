@@ -1,0 +1,40 @@
+<div class="company-details">
+  <h1><%= @company.name %></h1>
+
+  <div class="info-section">
+    <h2>Informações da Empresa</h2>
+
+    <div class="info-group">
+      <label>CNPJ:</label>
+      <p><%= CNPJ.new(@company.cnpj).formatted %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Endereço:</label>
+      <p>
+        <%=
+          [
+            @company.street,
+            @company.number,
+            @company.complement,
+            @company.neighborhood,
+            @company.city,
+            @company.state
+          ].reject(&:blank?).join(', ')
+        %>
+      </p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Editar', edit_company_path(@company), class: 'btn btn-primary' %>
+    <%= link_to 'Voltar', companies_path, class: 'btn btn-outline' %>
+    <%= button_to 'Excluir',
+              company_path(@company),
+              method: :delete,
+              form: {
+                data: { turbo_confirm: 'Tem certeza que deseja excluir esta empresa?' }
+              },
+              class: 'btn btn-danger' %>
+  </div>
+</div>

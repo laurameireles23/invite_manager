@@ -1,0 +1,74 @@
+<div class="form-container">
+  <%= form_with(model: company, local: true) do |f| %>
+    <% if company.errors.any? %>
+      <div class="alert">
+        <h2><%= pluralize(company.errors.count, "erro") %> impediram esta empresa de ser salva:</h2>
+        <ul>
+          <% company.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name, 'Nome' %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cnpj, 'CNPJ' %>
+      <%= f.text_field :cnpj,
+          data: {
+            controller: "cnpj",
+            cnpj_target: "input"
+          },
+          maxlength: 18 %>
+    </div>
+
+    <fieldset class="address-fields">
+      <legend>Endereço</legend>
+
+      <div class="field">
+        <%= f.label :street, 'Rua' %>
+        <%= f.text_field :street %>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <%= f.label :number, 'Número' %>
+          <%= f.text_field :number %>
+        </div>
+
+        <div class="field">
+          <%= f.label :complement, 'Complemento' %>
+          <%= f.text_field :complement %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :neighborhood, 'Bairro' %>
+        <%= f.text_field :neighborhood %>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <%= f.label :city, 'Cidade' %>
+          <%= f.text_field :city %>
+        </div>
+
+        <div class="field">
+          <%= f.label :state, 'Estado' %>
+          <%= f.select :state,
+              UF_BRASIL,
+              { include_blank: 'Selecione um estado' } %>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+      <%= link_to 'Voltar', companies_path, class: 'btn btn-outline' %>
+    </div>
+  <% end %>
+</div>
