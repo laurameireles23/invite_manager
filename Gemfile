@@ -34,9 +34,12 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'devise'
-gem 'pg_search'
-gem 'sass-rails'
+gem "devise"
+gem "pg_search"
+gem "sass-rails"
+gem "cpf_cnpj", "0.5.0"
+gem "bootstrap", "~> 5.3.2"
+gem "sassc-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -47,6 +50,11 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "rspec-rails", "~> 7.0.0"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "pry", "~> 0.15.0"
 end
 
 group :development do
@@ -58,4 +66,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rails-controller-testing"
+  gem "shoulda-matchers", "~> 5.0"
 end
