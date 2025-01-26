@@ -28,5 +28,6 @@ module InviteManager
     end
 
     config.autoload_paths += %W[#{config.root}/app/validators]
+    config.i18n.default_locale = "pt-BR"
   end
 end
