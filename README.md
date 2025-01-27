@@ -121,7 +121,7 @@ docker-compose up
 ```
 
 
-### 4. Rode a aplicação:
+### 5. Rode a aplicação:
 ```bash
 docker-compose run --service-ports web
 ```
