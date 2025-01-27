@@ -1,4 +1,4 @@
-<div class="company-details">
+<div class="details">
   <h1><%= @company.name %></h1>
 
   <div class="info-section">
@@ -27,14 +27,14 @@
   </div>
 
   <div class="actions">
-    <%= link_to 'Editar', edit_company_path(@company), class: 'btn btn-primary' %>
-    <%= link_to 'Voltar', companies_path, class: 'btn btn-outline' %>
+    <%= link_to 'Editar', edit_company_path(@company), class: 'btn btn-outline-primary' %>
+    <%= link_to 'Voltar', companies_path, class: 'btn btn-outline-secondary' %>
     <%= button_to 'Excluir',
               company_path(@company),
               method: :delete,
               form: {
                 data: { turbo_confirm: 'Tem certeza que deseja excluir esta empresa?' }
               },
-              class: 'btn btn-danger' %>
+              class: 'btn btn-outline-danger' %>
   </div>
 </div>
