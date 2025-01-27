@@ -4,17 +4,18 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 development:
   <<: *default
-  database: invite_manager_development
+  database: vik_invites_development
 
 test:
   <<: *default
-  database: invite_manager_test
+  database: vik_invites_test
 
 production:
   <<: *default
-  database: invite_manager_production
+  database: vik_invites_production
   username: invite_manager
   password: <%= ENV["INVITE_MANAGER_DATABASE_PASSWORD"] %>
