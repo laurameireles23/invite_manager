@@ -401,6 +401,8 @@ DEPENDENCIES
   rails (~> 7.2.1)
   rails-controller-testing
   rspec-rails (~> 7.0.0)
+  rubocop
+  rubocop-rails
   rubocop-rails-omakase
   sass-rails
   sassc-rails

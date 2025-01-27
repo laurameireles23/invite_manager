@@ -55,6 +55,8 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "pry", "~> 0.15.0"
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
