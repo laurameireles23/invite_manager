@@ -17,7 +17,7 @@ class CompaniesController < ApplicationController
     if result.success?
       redirect_to companies_path, notice: "Empresa criada com sucesso."
     else
-      @company = result.company
+      @company = result.record
       render :new
     end
   end

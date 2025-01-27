@@ -10,6 +10,14 @@ pt-BR:
         password_confirmation: "Confirmação de senha"
         current_password: "Senha atual"
         remember_me: "Lembrar-me"
+      company:
+        name: "Nome"
+        street: "Rua"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        cnpj: "CNPJ"
     errors:
       models:
         admin:
@@ -37,6 +45,31 @@ pt-BR:
               blank: não pode ficar em branco
             status:
               blank: não pode ficar em branco
+        company:
+          attributes:
+            name:
+              blank: "não pode ficar em branco"
+            street:
+              blank: "não pode ficar em branco"
+            number:
+              blank: "não pode ficar em branco"
+              not_a_number: "deve ser um número"
+              not_an_integer: "deve ser um número inteiro"
+              greater_than: "deve ser maior que zero"
+            neighborhood:
+              blank: "não pode ficar em branco"
+            city:
+              blank: "não pode ficar em branco"
+            state:
+              blank: "não pode ficar em branco"
   errors:
     messages:
       invalid: não é válido
+      blank: "não pode ficar em branco"
+      not_saved:
+        one: '1 erro impediu que %{resource} fosse salvo:'
+        other: '%{count} erros impediram que %{resource} fosse salvo:'
+      record_invalid: 'A validação falhou: %{errors}'
+      restrict_dependent_destroy:
+        has_one: Não é possível excluir o registro pois existe um %{record} dependente
+        has_many: Não é possível excluir o registro pois existem %{record} dependentes
