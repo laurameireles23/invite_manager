@@ -75,4 +75,5 @@ RSpec.configure do |config|
   Faker::Config.locale = 'pt-BR'
   config.include Shoulda::Matchers::ActiveModel, type: :model
   config.include Shoulda::Matchers::ActiveRecord, type: :model
+  config.include ActiveSupport::Testing::TimeHelpers
 end
