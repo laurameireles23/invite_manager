@@ -1,9 +1,39 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+admin = Admin.first_or_create!(
+  email: 'teste@exemplo.com',
+  password: '123456',
+  name: 'Admin Teste'
+)
+
+company = Company.create!(
+  name: 'Vik ings',
+  cnpj: CNPJ.generate(format: true),
+  street: 'Rua Teste',
+  number: '123',
+  neighborhood: 'Centro',
+  city: 'São Paulo',
+  state: 'SP'
+)
+
+10.times do |i|
+  Invitation.create!(
+    name: "Convite Janeiro #{i+1}",
+    email: Faker::Internet.email,
+    company: company,
+    admin: admin,
+    created_at: Time.zone.now - 10.days,
+    disable_at: nil
+  )
+end
+
+2.times do |i|
+  invitation = Invitation.create!(
+    name: "Convite Desativado #{i+1}",
+    email: Faker::Internet.email,
+    company: company,
+    admin: admin,
+    created_at: Time.zone.now - 10.days,
+    status: "cancelled"
+  )
+
+  invitation.update(disable_at: Time.zone.now + 11.days)
+end
