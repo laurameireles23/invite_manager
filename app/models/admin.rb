@@ -1,6 +1,7 @@
 class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :trackable
 
   has_many :invitations, dependent: :destroy
 
