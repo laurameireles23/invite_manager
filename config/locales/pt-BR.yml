@@ -18,6 +18,10 @@ pt-BR:
         city: "Cidade"
         state: "Estado"
         cnpj: "CNPJ"
+      invitation:
+        name: "Nome"
+        company: "Empresa"
+        disable_at: "Data de desativação"
     errors:
       models:
         admin:
@@ -45,6 +49,9 @@ pt-BR:
               blank: não pode ficar em branco
             status:
               blank: não pode ficar em branco
+            company:
+              required: "é obrigatória"
+              blank: "não pode ficar em branco"
         company:
           attributes:
             name:
@@ -73,3 +80,4 @@ pt-BR:
       restrict_dependent_destroy:
         has_one: Não é possível excluir o registro pois existe um %{record} dependente
         has_many: Não é possível excluir o registro pois existem %{record} dependentes
+      required: "é obrigatório"
