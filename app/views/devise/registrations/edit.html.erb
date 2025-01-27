@@ -1,0 +1,48 @@
+<h2>Editar Administrador</h2>
+
+<div class="form-container">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <% if resource.errors.any? %>
+      <div class="alert">
+        <h2><%= pluralize(resource.errors.count, "erro") %> impediram este administrador de ser salvo:</h2>
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name, 'Nome' %>
+      <%= f.text_field :name, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email, 'E-mail' %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, 'Nova Senha' %>
+      <%= f.password_field :password %>
+      <small class="text-muted">Deixe em branco se não quiser alterar a senha</small>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, 'Confirmação da Nova Senha' %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div class="field">
+      <%= f.label :current_password, 'Senha Atual' %>
+      <%= f.password_field :current_password %>
+      <small class="text-muted">Precisamos da sua senha atual para confirmar as alterações</small>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Atualizar', class: 'btn btn-primary' %>
+      <%= link_to 'Voltar', admin_profile_path, class: 'btn btn-outline' %>
+    </div>
+  <% end %>
+</div>
