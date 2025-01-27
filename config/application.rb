@@ -29,5 +29,8 @@ module InviteManager
 
     config.autoload_paths += %W[#{config.root}/app/validators]
     config.i18n.default_locale = "pt-BR"
+
+    config.time_zone = "Brasilia"
+    config.active_record.default_timezone = :local
   end
 end
