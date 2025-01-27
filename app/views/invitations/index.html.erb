@@ -2,6 +2,8 @@
 
 <%= link_to 'Novo Convite', new_invitation_path, class: 'btn btn-primary' %>
 
+<%= render 'filter', invitations: @invitations %>
+
 <table>
   <thead>
     <tr>
