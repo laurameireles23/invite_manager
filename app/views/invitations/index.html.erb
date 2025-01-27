@@ -1,0 +1,34 @@
+<h1>Convites</h1>
+
+<%= link_to 'Novo Convite', new_invitation_path, class: 'btn btn-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Empresa</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invitations.each do |invitation| %>
+      <tr>
+        <td><%= invitation.name %></td>
+        <td><%= invitation.email %></td>
+        <td><%= invitation.company.name %></td>
+        <td>
+          <span class="status-badge status-<%= invitation.status %>">
+            <%= invitation.status_label %>
+          </span>
+        </td>
+        <td class="action-links">
+          <%= link_to 'Editar', edit_invitation_path(invitation) if can_edit_invitation?(invitation) %>
+          <%= link_to 'Detalhes', invitation_path(invitation) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

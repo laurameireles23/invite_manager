@@ -1,0 +1,57 @@
+<div class="details">
+  <h1><%= @invitation.name %></h1>
+
+  <div class="info-section">
+    <h2>Informações do Convite</h2>
+
+    <div class="info-group">
+      <label>Email:</label>
+      <p><%= @invitation.email %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Empresa:</label>
+      <p><%= @invitation.company.name %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Status:</label>
+      <p>
+        <span class="status-badge status-<%= @invitation.status %>">
+          <%= @invitation.status_label %>
+        </span>
+      </p>
+    </div>
+
+    <% if @invitation.disable_at %>
+      <div class="info-group">
+        <label>Data de Desativação:</label>
+        <p><%= @invitation.disable_at&.strftime("%d/%m/%Y") %></p>
+      </div>
+    <% end %>
+
+    <div class="info-group">
+      <label>Criado por:</label>
+      <p><%= @invitation.admin.name %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Criado em:</label>
+      <p><%= @invitation.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Atualizado em:</label>
+      <p><%= @invitation.updated_at.strftime("%d/%m/%Y %H:%M") %></p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Editar', edit_invitation_path(@invitation), class: 'btn btn-outline-primary' if can_edit_invitation?(@invitation) %>
+    <%= link_to 'Voltar', invitations_path, class: 'btn btn-outline-secondary' %>
+    <%= button_to 'Excluir',
+              invitation_path(@invitation),
+              method: :delete,
+              class: 'btn btn-outline-danger' %>
+  </div>
+</div>

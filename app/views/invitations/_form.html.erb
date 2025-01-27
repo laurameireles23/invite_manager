@@ -1,0 +1,41 @@
+<div class="form-container">
+  <%= form_with(model: invitation, local: true) do |f| %>
+    <% if invitation.errors.any? %>
+      <div class="alert">
+        <h2><%= pluralize(invitation.errors.count, "erro") %> impediram este convite de ser salvo:</h2>
+        <ul>
+          <% invitation.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name, 'Nome' %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email, 'Email' %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :company_id, 'Empresa' %>
+      <%= f.collection_select :company_id, Company.all, :id, :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :status, 'Status' %>
+      <%= f.select :status,
+          available_statuses_for(invitation),
+          { prompt: 'Selecione um status' } %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Salvar', class: 'btn btn-outline-primary' %>
+      <%= link_to 'Voltar', invitations_path, class: 'btn btn-outline-secondary' %>
+    </div>
+  <% end %>
+</div>
