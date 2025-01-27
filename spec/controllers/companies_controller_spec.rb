@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe CompaniesController, type: :controller do
+  let(:admin) { create(:admin) }
+
+  before do
+    sign_in admin
+  end
+
   let!(:company) { create(:company) }
   let(:valid_attributes) { attributes_for(:company) }
   let(:invalid_attributes) { attributes_for(:company, :invalid) }
