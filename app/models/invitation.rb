@@ -7,12 +7,12 @@ class Invitation < ApplicationRecord
   validates :name, :email, :status, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  enum status: {
+  enum :status, {
     pending: "pending",
     accepted: "accepted",
     rejected: "rejected",
     cancelled: "cancelled"
-  }, _prefix: true
+  }
 
   def status_label
     {
