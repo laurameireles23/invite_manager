@@ -14,26 +14,26 @@ company = Company.create!(
   state: 'SP'
 )
 
-10.times do |i|
+5.times do |i|
   Invitation.create!(
     name: "Convite Janeiro #{i+1}",
     email: Faker::Internet.email,
     company: company,
     admin: admin,
-    created_at: Time.zone.now - 10.days,
+    created_at: Time.zone.parse("2025-01-15") - 10.days,
     disable_at: nil
   )
 end
 
-2.times do |i|
+5.times do |i|
   invitation = Invitation.create!(
     name: "Convite Desativado #{i+1}",
     email: Faker::Internet.email,
     company: company,
     admin: admin,
-    created_at: Time.zone.now - 10.days,
+    created_at: Time.zone.now + 1.days,
     status: "cancelled"
   )
 
-  invitation.update(disable_at: Time.zone.now + 11.days)
+  invitation.update(disable_at: Time.zone.parse("2025-01-17"))
 end
