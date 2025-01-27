@@ -40,7 +40,7 @@ class InvitationsQuery
     start_date = Date.parse(params[:start_date]).beginning_of_day
     end_date = Date.parse(params[:end_date]).end_of_day
 
-    rel.where("created_at BETWEEN ? AND ?", start_date, end_date)
+    rel.where("created_at <= ?", end_date)
        .where("disable_at IS NULL OR disable_at > ?", start_date)
   end
 end
