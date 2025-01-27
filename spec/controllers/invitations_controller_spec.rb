@@ -9,19 +9,83 @@ RSpec.describe InvitationsController, type: :controller do
   before { sign_in admin }
 
   describe 'GET #index' do
-    it 'returns a success response' do
-      create(:invitation, admin: admin)
-      get :index
-      expect(response).to be_successful
+    let!(:my_invitation) { create(:invitation, admin: admin, name: 'My Invitation') }
+    let!(:other_admin_invitation) { create(:invitation, admin: create(:admin), name: 'Other Invitation') }
+
+    context 'without filters' do
+      it 'lists only invitations from current admin' do
+        get :index
+        expect(assigns(:invitations)).to include(my_invitation)
+        expect(assigns(:invitations)).not_to include(other_admin_invitation)
+      end
     end
 
-    it 'lists only invitations from current admin' do
-      invitation = create(:invitation, admin: admin)
-      other_invitation = create(:invitation, admin: create(:admin))
+    context 'with name filter' do
+      let!(:matching_invitation) { create(:invitation, admin: admin, name: 'Target Name') }
+      let!(:non_matching_invitation) { create(:invitation, admin: admin, name: 'Other Name') }
 
-      get :index
-      expect(assigns(:invitations)).to include(invitation)
-      expect(assigns(:invitations)).not_to include(other_invitation)
+      it 'returns filtered invitations' do
+        get :index, params: { name: 'Target' }
+        expect(assigns(:invitations)).to include(matching_invitation)
+        expect(assigns(:invitations)).not_to include(non_matching_invitation)
+      end
+    end
+
+    context 'with company filter' do
+      let!(:company_invitation) { create(:invitation, admin: admin, company: company) }
+      let!(:other_invitation) { create(:invitation, admin: admin) }
+
+      it 'returns invitations for specific company' do
+        get :index, params: { company_id: company.id }
+        expect(assigns(:invitations)).to include(company_invitation)
+        expect(assigns(:invitations)).not_to include(other_invitation)
+      end
+    end
+
+    context 'with date range filter' do
+      let!(:old_invitation) { create(:invitation, admin: admin, created_at: 2.days.ago) }
+      let!(:new_invitation) { create(:invitation, admin: admin, created_at: Time.current) }
+
+      it 'returns invitations within date range' do
+        get :index, params: {
+          start_date: 1.day.ago.to_date.to_s,
+          end_date: Date.current.to_s
+        }
+
+        expect(assigns(:invitations)).to include(new_invitation)
+        expect(assigns(:invitations)).not_to include(old_invitation)
+      end
+    end
+
+    context 'with multiple filters' do
+      let(:company) { create(:company) }
+      let!(:matching_invitation) do
+        create(:invitation,
+          admin: admin,
+          name: 'Target Invitation',
+          company: company,
+          created_at: Time.current
+        )
+      end
+      let!(:non_matching_invitation) do
+        create(:invitation,
+          admin: admin,
+          name: 'Other Invitation',
+          created_at: 2.days.ago
+        )
+      end
+
+      it 'returns invitations matching all criteria' do
+        get :index, params: {
+          name: 'Target',
+          company_id: company.id,
+          start_date: Date.current.to_s,
+          end_date: Date.current.to_s
+        }
+
+        expect(assigns(:invitations)).to include(matching_invitation)
+        expect(assigns(:invitations)).not_to include(non_matching_invitation)
+      end
     end
   end
 

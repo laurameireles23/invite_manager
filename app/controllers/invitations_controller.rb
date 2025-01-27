@@ -1,8 +1,8 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: [:show, :edit, :update, :destroy]
+  before_action :set_invitation, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @invitations = Invitation.where(admin: current_admin)
+    @invitations = InvitationsQuery.new(Invitation.all, filter_params, current_admin).call
   end
 
   def show; end
@@ -54,5 +54,9 @@ class InvitationsController < ApplicationController
 
   def invitation_params
     params.require(:invitation).permit(:name, :email, :company_id, :status, :disable_at)
+  end
+
+  def filter_params
+    params.permit(:name, :company_id, :start_date, :end_date).to_h.compact_blank
   end
 end
