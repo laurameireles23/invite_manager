@@ -121,9 +121,15 @@ docker-compose up
 ```
 
 
-### 4. Rode a aplicação:
+### 5. Rode a aplicação:
 ```bash
 docker-compose run --service-ports web
+```
+
+### Dica: 
+- Caso queira facilitar os testes, foi disponibilizado uma massa de dados no seed. Basta rodar o seguinte comando após ter configurado o projeto.
+```bash
+docker-compose run web rails db:seed
 ```
 
 ## 🐳 Comandos docker uteis
