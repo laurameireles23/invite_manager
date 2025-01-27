@@ -28,3 +28,15 @@ pt-BR:
             current_password:
               blank: "não pode ficar em branco"
               invalid: "está incorreta"
+        invitation:
+          attributes:
+            email:
+              invalid: não é válido
+              blank: não pode ficar em branco
+            name:
+              blank: não pode ficar em branco
+            status:
+              blank: não pode ficar em branco
+  errors:
+    messages:
+      invalid: não é válido
