@@ -1,0 +1,21 @@
+<div class="company-details">
+  <h1><%= @admin.name %></h1>
+
+  <div class="info-section">
+    <h2>Informações do Administrador</h2>
+
+    <div class="info-group">
+      <label>Email:</label>
+      <p><%= @admin.email %></p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Editar', edit_admin_registration_path(@admin), class: 'btn btn-primary' %>
+    <%= button_to "Excluir",
+              registration_path(@admin),
+              data: { confirm: "Tem certeza?" },
+              method: :delete,
+              class: 'btn btn-danger' %>
+  </div>
+</div>
