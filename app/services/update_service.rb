@@ -1,4 +1,4 @@
-require 'ostruct'
+require "ostruct"
 
 class UpdateService
   def initialize(record, params)
@@ -7,6 +7,7 @@ class UpdateService
   end
 
   def call
-    @record.update(@params) ? OpenStruct.new(success?: true, record: @record) : OpenStruct.new(success?: false, record: @record)
+    @record.update(@params) ? OpenStruct.new(success?: true,
+record: @record) : OpenStruct.new(success?: false, record: @record)
   end
 end

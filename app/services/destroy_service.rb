@@ -1,4 +1,4 @@
-require 'ostruct'
+require "ostruct"
 
 class DestroyService
   def initialize(record)

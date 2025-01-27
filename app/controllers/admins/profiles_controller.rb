@@ -4,4 +4,4 @@ class Admins::ProfilesController < ApplicationController
   def show
     @admin = current_admin
   end
-end 
+end
