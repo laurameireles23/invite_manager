@@ -126,6 +126,12 @@ docker-compose up
 docker-compose run --service-ports web
 ```
 
+### Dica: 
+- Caso queira facilitar os testes, foi disponibilizado uma massa de dados no seed. Basta rodar o seguinte comando após ter configurado o projeto.
+```bash
+docker-compose run web rails db:seed
+```
+
 ## 🐳 Comandos docker uteis
 - Construir os containers: docker-compose build
 
