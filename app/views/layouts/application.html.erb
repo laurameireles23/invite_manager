@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Invite Manager" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>VIK Invites</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', type: 'module', 'data-turbo-track': 'reload', defer: true %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar">
+      <div class="container">
+        <%= link_to 'VIK Invites', root_path, class: 'brand' %>
+        <% if admin_signed_in? %>
+          <div class="nav-links">
+            <%= link_to 'Convites', invitations_path,
+                class: current_page?(invitations_path) ? 'active' : '' %>
+
+            <%= link_to 'Empresas', companies_path,
+                class: current_page?(companies_path) ? 'active' : '' %>
+
+            <% if admin_signed_in? %>
+              <%= link_to 'Minha Conta', admin_profile_path,
+                  class: current_page?(admin_profile_path) ? 'active' : '' %>
+
+              <%= button_to 'Sair', destroy_admin_session_path,
+                  method: :delete,
+                  class: 'btn btn-outline',
+                  form: { class: 'd-inline' } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+
+    <div class="container">
+      <% if notice %>
+        <div class="notice"><%= notice %></div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert"><%= alert %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
