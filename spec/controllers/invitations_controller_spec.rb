@@ -43,17 +43,21 @@ RSpec.describe InvitationsController, type: :controller do
     end
 
     context 'with date range filter' do
-      let!(:old_invitation) { create(:invitation, admin: admin, created_at: 2.days.ago) }
-      let!(:new_invitation) { create(:invitation, admin: admin, created_at: Time.current) }
+      let(:new_invitation) { create(:invitation, admin: admin, company: company, created_at: "2025-01-27") }
+      let(:old_active_invitation) { create(:invitation, admin: admin, company: company, created_at: "2025-01-25") }
+      let(:old_disabled_invitation) do
+        create(:invitation, admin: admin, company: company, created_at: "2025-01-20", disable_at: "2025-01-21")
+      end
 
-      it 'returns invitations within date range' do
+      it "returns invitations within date range" do
         get :index, params: {
-          start_date: 1.day.ago.to_date.to_s,
-          end_date: Date.current.to_s
+          start_date: "2025-01-27",
+          end_date: "2025-01-31"
         }
 
         expect(assigns(:invitations)).to include(new_invitation)
-        expect(assigns(:invitations)).not_to include(old_invitation)
+        expect(assigns(:invitations)).to include(old_active_invitation)
+        expect(assigns(:invitations)).not_to include(old_disabled_invitation)
       end
     end
 
