@@ -37,7 +37,7 @@ gem "bootsnap", require: false
 gem "devise"
 gem "pg_search"
 gem "sass-rails"
-gem "cpf_cnpj", "0.5.0"
+gem "cpf_cnpj", "1.0.1"
 gem "bootstrap", "~> 5.3.2"
 gem "sassc-rails"
 
